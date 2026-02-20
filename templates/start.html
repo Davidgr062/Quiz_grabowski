@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin-top: 100px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hello World 👋</h1>
+    <p>Das ist meine erste Website.</p>
+
+    <button onclick="zeigeNachricht()">Klick mich</button>
+
+    <script>
+        function zeigeNachricht() {
+            alert("Willkommen auf meiner Website!");
+        }
+    </script>
+
+</body>
+
+
+
+<a href="{{ url_for('schüler') }}">Zur Kontaktseite</a>
+
+<a href="{{ url_for('index') }}">Zur Hauptseite</a>
+
+
+</html>
