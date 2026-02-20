@@ -1,35 +1,51 @@
-<html>
-    <head>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <title>Schüler verwalten</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    </head>
-    <body class="bg-dark text-light">
-<div class="container mt-5">
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Schüler verwalten</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background-color: #212529;
+            color: #f8f9fa;
+        }
+        .card {
+            background-color: #2d3035;
+            border: 1px solid #495057;
+        }
+        .form-control {
+            background-color: #343a40;
+            border: 1px solid #495057;
+            color: #f8f9fa;
+        }
+        .form-control::placeholder {
+            color: #adb5bd;
+        }
+    </style>
+</head>
+<body class="bg-dark text-light">
+    <div class="container mt-5">
  
-    <h1>
-        Schüler verwalten
-    </h1>
+        <h1 class="mb-4">Schüler verwalten</h1>
  
-    <!-- Formular zum Hinzufügen -->
-    <div class="card card-body bg-dark text-light mb-4 mt-3">
-        <form action="{{ url_for('add_schueler') }}" method="POST">
-            <div class="mb-2">
-                <input type="text" name="name" class="form-control" placeholder="Name" required>
-            </div>
-            <div class="mb-2">
-                <input type="text" name="klasse" class="form-control" placeholder="Klasse" required>
-            </div>
-            <button type="submit" class="btn btn-info">Schüler hinzufügen</button>
-        </form>
+        <!-- Formular zum Hinzufügen -->
+        <div class="card card-body bg-dark text-light mb-4 mt-3">
+            <form action="{{ url_for('add_schueler') }}" method="POST">
+                <div class="mb-2">
+                    <input type="text" name="name" class="form-control" placeholder="Name" required>
+                </div>
+                <div class="mb-2">
+                    <input type="text" name="klasse" class="form-control" placeholder="Klasse" required>
+                </div>
+                <button type="submit" class="btn btn-info">Schüler hinzufügen</button>
+            </form>
+        </div>
+ 
+        <div class="mt-3">
+            <a href="{{ url_for('start') }}" class="btn btn-secondary">Zurück zur Startseite</a>
+        </div>
+ 
     </div>
- 
-</div>
 </body>
 </html>
- 
-
-
-<a href="{{ url_for('start') }}" class="btn btn-secondary">Zurück zur Startseite</a>

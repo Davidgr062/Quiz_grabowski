@@ -2,31 +2,44 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <title>Kwiss</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #212529;
+            color: #f8f9fa;
             text-align: center;
             margin-top: 100px;
         }
         h1 {
-            color: #333;
+            color: #f8f9fa;
         }
         p {
-            color: #666;
+            color: #adb5bd;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #4CAF50;
+            background-color: #0d6efd;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #0b5ed7;
+        }
+        .nav-links {
+            margin-top: 30px;
+        }
+        .nav-links a {
+            margin: 0 10px;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+        .nav-links a:hover {
+            color: #0b5ed7;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -43,13 +56,10 @@
         }
     </script>
 
+    <div class="nav-links">
+        <a href="{{ url_for('schüler') }}">Als Schüler fortfahren</a>
+        <a href="{{ url_for('index') }}">Als Lehrer fortfahren</a>
+    </div>
+
 </body>
-
-
-
-<a href="{{ url_for('schüler') }}">Zur Kontaktseite</a>
-
-<a href="{{ url_for('index') }}">Zur Hauptseite</a>
-
-
 </html>

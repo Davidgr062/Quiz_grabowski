@@ -17,6 +17,14 @@ CREATE TABLE IF NOT EXISTS schueler (
     name TEXT NOT NULL,
     klasse TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS text_quiz (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    frage1 TEXT NOT NULL,
+    antwort1 TEXT NOT NULL,
+    frage2 TEXT NOT NULL,
+    antwort2 TEXT NOT NULL
+);
 '''
 
 def init_db(path: Path):
@@ -28,4 +36,4 @@ def init_db(path: Path):
 
 if __name__ == '__main__':
     init_db(DB_PATH)
-    print(f'Initialized database at: {DB_PATH}')
+    print(f'Datenbank initialisiert bei: {DB_PATH}')
