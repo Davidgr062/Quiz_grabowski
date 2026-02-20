@@ -2,86 +2,123 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digitales Schwarzes Brett</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style2/style.css') }}">
+    <style>
+        body {
+            background-color: #ffffff;
+            padding: 20px;
+        }
+        h1 {
+            color: #000;
+            margin-bottom: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border: 2px solid #000;
+            margin-bottom: 20px;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        h5 {
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
+        .form-control {
+            margin-bottom: 10px;
+            border: 1px solid #000;
+        }
+        .btn-warning {
+            background-color: #fff;
+            border: 2px solid #000;
+            color: #000;
+        }
+        .btn-warning:hover {
+            background-color: #000;
+            color: #fff;
+        }
+        table {
+            background-color: #fff;
+            border: 2px solid #000;
+        }
+        th {
+            background-color: #000 !important;
+            color: #fff !important;
+            border: 1px solid #000;
+        }
+        td {
+            border: 1px solid #000;
+            color: #000;
+        }
+    </style>
 </head>
-<body class="bg-dark text-light">
-    <div class="container mt-5 pb-5">
+<body>
+    <div class="container">
         
-        <!-- Header -->
-        <div class="text-center mb-5">
-            <h1 class="display-4 fw-bold">
-                📌 Schwarzes Brett 
-                <span class="badge bg-primary">{{ beitraege|length }}</span>
-            </h1>
-            <p class="lead text-secondary">Willkommen am digitalen Schwarzen Brett</p>
-        </div>
+        <h1>Meine Quizfragen</h1>
 
-        <!-- Formular zum Hinzufügen -->
-        <div class="card bg-secondary-subtle mb-4 mt-3 shadow-lg">
+        <!-- Formular -->
+        <div class="card">
             <div class="card-body">
-                <h5 class="card-title mb-3">✏️ Neue Nachricht erstellen</h5>
-                <form action="{{ url_for('add_post') }}" method="POST" class="row g-3">
-                    <div class="col-md-4">
-                        <input type="text" name="autor" class="form-control" placeholder="Dein Name" required>
+                <h5>Neue Frage hinzufugen</h5>
+                <form action="{{ url_for('add_post') }}" method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="frage1" class="form-control" placeholder="Frage 1" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="antwort1" class="form-control" placeholder="Antwort 1" required>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <input type="text" name="titel" class="form-control" placeholder="Titel" required>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="frage2" class="form-control" placeholder="Frage 2" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="antwort2" class="form-control" placeholder="Antwort 2" required>
+                        </div>
                     </div>
-                    <div class="col-md-12">
-                        <textarea name="inhalt" class="form-control" placeholder="Deine Nachricht..." rows="3" required></textarea>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-info">📨 Abschicken</button>
-                    </div>
+                    <button type="submit" class="btn btn-warning mt-2">Speichern</button>
                 </form>
             </div>
         </div>
 
-        <!-- Tabelle der Beiträge -->
-        <div class="card bg-secondary-subtle shadow-lg">
+        <!-- Tabelle -->
+        <div class="card">
             <div class="card-body">
-                <h5 class="card-title mb-3">📋 Alle Nachrichten</h5>
+                <h5>Alle Fragen ({{ text_quiz|length }})</h5>
                 
-                {% if beitraege|length == 0 %}
-                    <div class="alert alert-info" role="alert">
-                        Noch keine Nachrichten vorhanden. Sei der Erste!
-                    </div>
+                {% if text_quiz|length == 0 %}
+                    <p>Noch keine Fragen vorhanden.</p>
                 {% else %}
-                    <div class="table-responsive">
-                        <table class="table table-dark table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Autor</th>
-                                    <th>Titel</th>
-                                    <th>Inhalt</th>
-                                    <th style="width: 100px;">Aktion</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for beitrag in beitraege %}
-                                <tr>
-                                    <td><strong>{{ beitrag['autor'] }}</strong></td>
-                                    <td>{{ beitrag['titel'] }}</td>
-                                    <td>{{ beitrag['inhalt'] }}</td>
-                                    <td>
-                                        <form action="{{ url_for('delete_post', id=beitrag['id']) }}" method="POST" onsubmit="return confirm('Möchtest du diesen Beitrag wirklich löschen?');">
-                                            <button class="btn btn-danger btn-sm w-100">🗑️ Löschen</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Frage 1</th>
+                                <th>Antwort 1</th>
+                                <th>Frage 2</th>
+                                <th>Antwort 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for quiz in text_quiz %}
+                            <tr>
+                                <td>{{ quiz['frage1'] }}</td>
+                                <td>{{ quiz['antwort1'] }}</td>
+                                <td>{{ quiz['frage2'] }}</td>
+                                <td>{{ quiz['antwort2'] }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 {% endif %}
             </div>
         </div>
 
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

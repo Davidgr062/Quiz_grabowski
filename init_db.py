@@ -7,4 +7,4 @@ with open('schema.sql') as f:
 
 connection.commit()
 connection.close()
-print("Datenbank erfolgreich initialisiert!")
+print("Quiz hcohgeladen!")
