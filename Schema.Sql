@@ -1,8 +1,9 @@
-DROP TABLE IF EXISTS beitraege;
+DROP TABLE IF EXISTS text_quiz;
 
-CREATE TABLE beitraege (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    autor TEXT,
-    titel TEXT,
-    inhalt TEXT
+CREATE TABLE text_quiz (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    frage1 TEXT,
+    antwort1 TEXT,
+    frage2 TEXT,
+    antwort2 TEXT
 );

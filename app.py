@@ -13,34 +13,35 @@ def get_db_connection():
 @app.route('/')
 def index():
     conn = get_db_connection()
-    beitraege = conn.execute('SELECT * FROM beitraege').fetchall()
+    text_quiz = conn.execute('SELECT * FROM text_quiz').fetchall()
     conn.close()
-    return render_template('index.html', beitraege=beitraege)
+    return render_template('index.html', text_quiz=text_quiz)
 
 # Neue Nachricht hinzufügen
 @app.route('/add', methods=['POST'])
 def add_post():
-    autor = request.form.get('autor')
-    titel = request.form.get('titel')
-    inhalt = request.form.get('inhalt')
+    frage1 = request.form.get('frage1')
+    antwort1 = request.form.get('antwort1')
+    frage2 = request.form.get('frage2')
+    antwort2 = request.form.get('antwort2')
 
-    if autor and titel and inhalt:
+    if frage1 and antwort1 and frage2 and antwort2:
         conn = get_db_connection()
-        conn.execute("INSERT INTO beitraege (autor, titel, inhalt) VALUES (?, ?, ?)",
-                     (autor, titel, inhalt))
+        conn.execute("INSERT INTO text_quiz (frage1, antwort1, frage2, antwort2) VALUES (?, ?, ?, ?)",
+                     (frage1, antwort1, frage1, antwort2))
         conn.commit()
         conn.close()
 
     return redirect(url_for('index'))
 
 # Nachricht löschen
-@app.route('/delete/<int:id>', methods=['POST'])
-def delete_post(id):
-    conn = get_db_connection()
-    conn.execute('DELETE FROM beitraege WHERE id = ?', (id,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for('index'))
+#@app.route('/delete/<int:id>', methods=['POST'])
+#def delete_post(id):
+   # conn = get_db_connection()
+   # conn.execute('DELETE FROM text_quiz WHERE id = ?', (id,))
+   # conn.commit()
+   # conn.close()
+   # return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
