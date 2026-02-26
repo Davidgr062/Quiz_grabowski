@@ -5,56 +5,7 @@
     <title>Quiz</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style2/style.css') }}">
-    <style>
-        body {
-            background-color: #ffffff;
-            padding: 20px;
-        }
-        h1 {
-            color: #000;
-            margin-bottom: 20px;
-        }
-        .card {
-            background-color: #fff;
-            border: 2px solid #000;
-            margin-bottom: 20px;
-        }
-        .card-body {
-            padding: 20px;
-        }
-        h5 {
-            color: #000;
-            border-bottom: 2px solid #000;
-            padding-bottom: 10px;
-            font-weight: bold;
-        }
-        .form-control {
-            margin-bottom: 10px;
-            border: 1px solid #000;
-        }
-        .btn-warning {
-            background-color: #fff;
-            border: 2px solid #000;
-            color: #000;
-        }
-        .btn-warning:hover {
-            background-color: #000;
-            color: #fff;
-        }
-        table {
-            background-color: #fff;
-            border: 2px solid #000;
-        }
-        th {
-            background-color: #000 !important;
-            color: #fff !important;
-            border: 1px solid #000;
-        }
-        td {
-            border: 1px solid #000;
-            color: #000;
-        }
-    </style>
+
 </head>
 <body>
     <div class="container">
@@ -67,6 +18,9 @@
                 <h5>Neue Frage hinzufugen</h5>
                 <form action="{{ url_for('add_post') }}" method="POST">
                     <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="quiz_titel" class="form-control" placeholder="Titel" required>
+                        </div>
                         <div class="col-md-6">
                             <input type="text" name="frage1" class="form-control" placeholder="Frage 1" required>
                         </div>
@@ -90,31 +44,22 @@
         <!-- Tabelle -->
         <div class="card">
             <div class="card-body">
-                <h5>Alle Fragen ({{ text_quiz|length }})</h5>
+                
                 
                 {% if text_quiz|length == 0 %}
                     <p>Noch keine Fragen vorhanden.</p>
                 {% else %}
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Frage 1</th>
-                                <th>Antwort 1</th>
-                                <th>Frage 2</th>
-                                <th>Antwort 2</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for quiz in text_quiz %}
-                            <tr>
-                                <td>{{ quiz['frage1'] }}</td>
-                                <td>{{ quiz['antwort1'] }}</td>
-                                <td>{{ quiz['frage2'] }}</td>
-                                <td>{{ quiz['antwort2'] }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                    
+                    
+                    {% for quiz in text_quiz %}
+                    <div class="card mb-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ quiz['quiz_titel'] }}</h5>
+                            <p class="card-text">Klicke hier um die Fragen und Antworten des Quizes zu sehen!</p>
+                            <a href="#" class="btn btn-primary">Mehr lesen</a>
+                        </div>
+                    </div>
+                    {% endfor %}
                 {% endif %}
             </div>
         </div>
