@@ -17,6 +17,11 @@ def index():
     conn.close()
     return render_template('index.html', text_quiz=text_quiz)
 
+# Quiz-Seite
+@app.route('/quiz')
+def quiz():
+    return render_template('quiz.html')
+
 # Neue Nachricht hinzufügen
 @app.route('/add', methods=['POST'])
 def add_post():
