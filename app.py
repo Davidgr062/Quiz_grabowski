@@ -17,10 +17,41 @@ def index():
     conn.close()
     return render_template('index.html', text_quiz=text_quiz)
 
-# Quiz-Seite
-@app.route('/quiz')
+# Quiz-Seite: Fragen anzeigen und beantworten
+@app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
-    return render_template('quiz.html')
+    conn = get_db_connection()
+    text_quiz = conn.execute('SELECT * FROM text_quiz').fetchall()
+    
+    if request.method == 'POST':
+        # Antworten überprüfen
+        ergebnisse = []
+        for quiz in text_quiz:
+            frage1_id = quiz['Id']
+            frage2_id = quiz['Id']
+            
+            user_antwort1 = request.form.get(f'antwort1_{frage1_id}', '').strip()
+            user_antwort2 = request.form.get(f'antwort2_{frage2_id}', '').strip()
+            
+            correct1 = user_antwort1.lower() == quiz['antwort1'].lower()
+            correct2 = user_antwort2.lower() == quiz['antwort2'].lower()
+            
+            ergebnisse.append({
+                'frage1': quiz['frage1'],
+                'antwort1': quiz['antwort1'],
+                'user_antwort1': user_antwort1,
+                'correct1': correct1,
+                'frage2': quiz['frage2'],
+                'antwort2': quiz['antwort2'],
+                'user_antwort2': user_antwort2,
+                'correct2': correct2
+            })
+        
+        conn.close()
+        return render_template('quiz.html', text_quiz=text_quiz, ergebnisse=ergebnisse)
+    
+    conn.close()
+    return render_template('quiz.html', text_quiz=text_quiz)
 
 # Neue Nachricht hinzufügen
 @app.route('/add', methods=['POST'])
