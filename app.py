@@ -72,13 +72,13 @@ def add_post():
     return redirect(url_for('index'))
 
 # Nachricht löschen
-#@app.route('/delete/<int:id>', methods=['POST'])
-#def delete_post(id):
-   # conn = get_db_connection()
-   # conn.execute('DELETE FROM text_quiz WHERE id = ?', (id,))
-   # conn.commit()
-   # conn.close()
-   # return redirect(url_for('index'))
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete_post(id):
+    conn = get_db_connection()
+    conn.execute('DELETE FROM text_quiz WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
