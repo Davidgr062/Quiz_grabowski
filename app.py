@@ -56,15 +56,16 @@ def quiz():
 # Neue Nachricht hinzufügen
 @app.route('/add', methods=['POST'])
 def add_post():
+    quiz_titel = request.form.get('quiz_titel')
     frage1 = request.form.get('frage1')
     antwort1 = request.form.get('antwort1')
     frage2 = request.form.get('frage2')
     antwort2 = request.form.get('antwort2')
 
-    if frage1 and antwort1 and frage2 and antwort2:
+    if frage1 and antwort1 and frage2 and antwort2 and quiz_titel:
         conn = get_db_connection()
-        conn.execute("INSERT INTO text_quiz (frage1, antwort1, frage2, antwort2) VALUES (?, ?, ?, ?)",
-                     (frage1, antwort1, frage1, antwort2))
+        conn.execute("INSERT INTO text_quiz (frage1, antwort1, frage2, antwort2, quiz_titel) VALUES (?, ?, ?, ?, ?)",
+                     (frage1, antwort1, frage2, antwort2, quiz_titel))
         conn.commit()
         conn.close()
 
