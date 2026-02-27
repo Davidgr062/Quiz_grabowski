@@ -70,12 +70,12 @@
         
         <a href="{{ url_for('index') }}" class="btn btn-secondary mb-3">Zurück zur Übersicht</a>
 
-        {% if ergebnisse %}
+        {% if erstelltes_Quiz %}
         <!-- Ergebnisse anzeigen -->
         <div class="card mb-4">
             <div class="card-body">
                 <h5>Deine Ergebnisse</h5>
-                {% for ergebnis in ergebnisse %}
+                {% for ergebnis in erstelltes_Quiz  %}
                 <div class="mb-4">
                     <p><strong>Frage 1:</strong> {{ ergebnis['frage1'] }}</p>
                     <p>Deine Antwort: {{ ergebnis['user_antwort1'] }}</p>
@@ -104,7 +104,7 @@
                     <p>Noch keine Fragen vorhanden. Bitte füge zuerst Fragen hinzu!</p>
                 </div>
             </div>
-        {% elif not ergebnisse %}
+        {% elif not erstelltes_Quiz %}
             <form action="{{ url_for('quiz') }}" method="POST">
                 {% for quiz in text_quiz %}
                 <div class="card frage-card">

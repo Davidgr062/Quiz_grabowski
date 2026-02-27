@@ -11,7 +11,7 @@
     <div class="container">
         
         <h1>Meine Quizfragen</h1>
-        <a href="templates/quiz.html" target="_blank">Quiz beantworten</a>
+        
 
         <a href="{{ url_for('quiz') }}" class="btn btn-warning mb-3">Quiz beantworten</a>
 
@@ -59,9 +59,8 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ quiz['quiz_titel'] }}</h5>
                             <p class="card-text">Klicke hier um die Fragen und Antworten des Quizes zu sehen!</p>
-                            <a href="#" class="btn btn-primary">Mehr lesen</a>
                             <form action="{{ url_for('delete_post', id=quiz['Id']) }}" method="POST" style="display:inline;">
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Mochtest du dieses Quiz wirklich loschen?')">Loschen</button>
+                                <button type="submit" class="btn btn-danger" >Löschen</button>
                             </form>
                         </div>
                     </div>
