@@ -9,8 +9,13 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
  
-# Startseite / Board anzeigen
+# Startseite
 @app.route('/')
+def start():
+    return render_template('start.html')
+
+# Lehrer-Seite / Board anzeigen
+@app.route('/lehrer')
 def index():
     conn = get_db_connection()
     text_quiz = conn.execute('SELECT * FROM text_quiz').fetchall()
