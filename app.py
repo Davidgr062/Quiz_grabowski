@@ -25,7 +25,7 @@ def quiz():
    
     if request.method == 'POST':
         # Antworten überprüfen
-        ergebnisse = []
+        erstelltes_Quiz  = []
         for quiz in text_quiz:
             frage1_id = quiz['Id']
             frage2_id = quiz['Id']
@@ -35,8 +35,8 @@ def quiz():
            
             correct1 = user_antwort1.lower() == quiz['antwort1'].lower()
             correct2 = user_antwort2.lower() == quiz['antwort2'].lower()
-           
-            ergebnisse.append({
+            
+            erstelltes_Quiz.append({
                 'frage1': quiz['frage1'],
                 'antwort1': quiz['antwort1'],
                 'user_antwort1': user_antwort1,
@@ -48,8 +48,8 @@ def quiz():
             })
        
         conn.close()
-        return render_template('quiz.html', text_quiz=text_quiz, ergebnisse=ergebnisse)
-   
+        return render_template('quiz.html', text_quiz=text_quiz, erstelltes_Quiz=erstelltes_Quiz )
+    
     conn.close()
     return render_template('quiz.html', text_quiz=text_quiz)
  
