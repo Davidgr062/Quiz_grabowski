@@ -2,25 +2,23 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Digitales Schwarzes Brett & Quiz</title>
+    <title>Quiz</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style2/style.css') }}">
-
+ 
 </head>
 <body>
     <div class="container">
-        
+       
         <h1>Meine Quizfragen</h1>
         <a href="templates/quiz.html" target="_blank">Quiz beantworten</a>
-
+ 
         <a href="{{ url_for('quiz') }}" class="btn btn-warning mb-3">Quiz beantworten</a>
-
-    
-
-        <!-- Quiz Formular -->
+ 
+        <!-- Formular -->
         <div class="card">
             <div class="card-body">
-                <h5>Neue Quizfrage hinzufügen</h5>
+                <h5>Neue Frage hinzufügen</h5>
                 <form action="{{ url_for('add_post') }}" method="POST">
                     <div class="row">
                         <div class="col-md-6">
@@ -41,29 +39,28 @@
                             <input type="text" name="antwort2" class="form-control" placeholder="Antwort 2" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-warning mt-2">Frage speichern</button>
+                    <button type="submit" class="btn btn-warning mt-2">Speichern</button>
                 </form>
             </div>
         </div>
-
-        <!-- Quiz Tabelle -->
+ 
+        <!-- Tabelle -->
         <div class="card">
             <div class="card-body">
-                
-                
+               
+               
                 {% if text_quiz|length == 0 %}
                     <p>Noch keine Fragen vorhanden.</p>
                 {% else %}
-                    
-                    
+                   
+                   
                     {% for quiz in text_quiz %}
                     <div class="card mb-3" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">{{ quiz['quiz_titel'] }}</h5>
                             <p class="card-text">Klicke hier um die Fragen und Antworten des Quizes zu sehen!</p>
-                            <a href="#" class="btn btn-primary">Mehr lesen</a>
                             <form action="{{ url_for('delete_post', id=quiz['Id']) }}" method="POST" style="display:inline;">
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Mochtest du dieses Quiz wirklich loschen?')">Loschen</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Mochtest du dieses Quiz wirklich loschen?')">Löschen</button>
                             </form>
                         </div>
                     </div>
@@ -71,11 +68,8 @@
                 {% endif %}
             </div>
         </div>
-
-        <div class="mt-3 mb-5">
-            <a href="{{ url_for('start') }}" class="btn btn-secondary">Zurück zur Startseite</a>
-        </div>
-
+ 
     </div>
 </body>
 </html>
+ 
