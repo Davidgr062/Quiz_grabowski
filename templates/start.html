@@ -2,64 +2,29 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Kwiss</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #212529;
-            color: #f8f9fa;
-            text-align: center;
-            margin-top: 100px;
-        }
-        h1 {
-            color: #f8f9fa;
-        }
-        p {
-            color: #adb5bd;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #0d6efd;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0b5ed7;
-        }
-        .nav-links {
-            margin-top: 30px;
-        }
-        .nav-links a {
-            margin: 0 10px;
-            color: #0d6efd;
-            text-decoration: none;
-        }
-        .nav-links a:hover {
-            color: #0b5ed7;
-            text-decoration: underline;
-        }
-    </style>
+    <title>Hello World</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css/style.css') }}">
 </head>
 <body>
+    <div class="container text-center mt-5">
+        
+        <h1>Hello World 👋</h1>
+        <p class="text-muted">Das ist meine erste Website.</p>
 
-    <h1>Hello World 👋</h1>
-    <p>Das ist meine erste Website.</p>
+        <button onclick="zeigeNachricht()" class="btn btn-primary mb-4">Klick mich</button>
 
-    <button onclick="zeigeNachricht()">Klick mich</button>
+        <script>
+            function zeigeNachricht() {
+                alert("Willkommen auf meiner Website!");
+            }
+        </script>
 
-    <script>
-        function zeigeNachricht() {
-            alert("Willkommen auf meiner Website!");
-        }
-    </script>
+        <div class="nav-links">
+            <a href="{{ url_for('schüler') }}">Schüler verwalten</a>
+            <a href="{{ url_for('index') }}">Zur Hauptseite</a>
+        </div>
 
-    <div class="nav-links">
-        <a href="{{ url_for('schüler') }}">Als Schüler fortfahren</a>
-        <a href="{{ url_for('index') }}">Als Lehrer fortfahren</a>
     </div>
-
 </body>
 </html>
