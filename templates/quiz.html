@@ -17,17 +17,17 @@
         <a href="{{ url_for('quiz') }}" class="btn btn-warning mb-3">Quiz beantworten</a>
                    
                     {% for quiz in text_quiz %}
-                    <div class="card mb-3" style="width: 18rem;">
+                        <div class="card mb-3" style="width: 18rem;">
                         <div class="card-body">
-                            <h5 class="card-title">{{ quiz['quiz_titel'] }}</h5>
-                            <p class="card-text">Klicke hier um die Fragen und Antworten des Quizes zu sehen!</p>
-                            <form action="{{ url_for('delete_post', id=quiz['Id']) }}" method="POST" style="display:inline;">
-                                <button type="submit" class="btn btn-danger" >Löschen</button>
-                            </form>
+                        <h5 class="card-title">{{ quiz['quiz_titel'] }}</h5>
+                        <p class="card-text">Klicke hier um die Fragen und Antworten des Quizes zu sehen!</p>
+                        <form action="{{ url_for('delete_post', id=quiz['Id']) }}" method="POST">
+                        <button type="submit" class="btn btn-danger">Löschen</button>
+                        </form>
                         </div>
-                    </div>
+                        </div>
                     {% endfor %}
-                {% endif %}
+                
             </div>
         </div>
  
