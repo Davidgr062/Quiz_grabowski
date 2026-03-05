@@ -2,136 +2,35 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz beantworten</title>
+    <title>Quiz</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style2/style.css') }}">
-    <style>
-        body {
-            background-color: #ffffff;
-            padding: 20px;
-        }
-        h1 {
-            color: #000;
-            margin-bottom: 20px;
-        }
-        .card {
-            background-color: #fff;
-            border: 2px solid #000;
-            margin-bottom: 20px;
-        }
-        .card-body {
-            padding: 20px;
-        }
-        h5 {
-            color: #000;
-            border-bottom: 2px solid #000;
-            padding-bottom: 10px;
-            font-weight: bold;
-        }
-        .form-control {
-            margin-bottom: 10px;
-            border: 1px solid #000;
-        }
-        .btn-primary {
-            background-color: #000;
-            border: 2px solid #000;
-            color: #fff;
-        }
-        .btn-primary:hover {
-            background-color: #333;
-            border: 2px solid #333;
-        }
-        .btn-secondary {
-            background-color: #fff;
-            border: 2px solid #000;
-            color: #000;
-        }
-        .btn-secondary:hover {
-            background-color: #000;
-            color: #fff;
-        }
-        .frage-card {
-            margin-bottom: 30px;
-        }
-        .correct {
-            color: green;
-            font-weight: bold;
-        }
-        .incorrect {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+ 
 </head>
 <body>
     <div class="container">
+       
+        <h1>Meine Quizfragen</h1>
+        <a href="{{ url_for('start') }}" class="btn btn-secondary mb-3">Zurück zur Startseite</a>
         
-        <h1>Quiz beantworten</h1>
-        
-        <a href="{{ url_for('index') }}" class="btn btn-secondary mb-3">Zurück zur Übersicht</a>
 
-        {% if erstelltes_Quiz %}
-        <!-- Ergebnisse anzeigen -->
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5>Deine Ergebnisse</h5>
-                {% for ergebnis in erstelltes_Quiz  %}
-                <div class="mb-4">
-                    <p><strong>Frage 1:</strong> {{ ergebnis['frage1'] }}</p>
-                    <p>Deine Antwort: {{ ergebnis['user_antwort1'] }}</p>
-                    <p class="{% if ergebnis['correct1'] %}correct{% else %}incorrect{% endif %}">
-                        {% if ergebnis['correct1'] %}✓ Richtig!{% else %}✗ Falsch. Die richtige Antwort ist: {{ ergebnis['antwort1'] }}{% endif %}
-                    </p>
-                    
-                    <hr>
-                    
-                    <p><strong>Frage 2:</strong> {{ ergebnis['frage2'] }}</p>
-                    <p>Deine Antwort: {{ ergebnis['user_antwort2'] }}</p>
-                    <p class="{% if ergebnis['correct2'] %}correct{% else %}incorrect{% endif %}">
-                        {% if ergebnis['correct2'] %}✓ Richtig!{% else %}✗ Falsch. Die richtige Antwort ist: {{ ergebnis['antwort2'] }}{% endif %}
-                    </p>
-                </div>
-                {% endfor %}
-                
-                
-            </div>
-        </div>
-        {% endif %}
-
-        {% if text_quiz|length == 0 %}
-            <div class="card">
-                <div class="card-body">
-                    <p>Noch keine Fragen vorhanden. Bitte füge zuerst Fragen hinzu!</p>
-                </div>
-            </div>
-        {% elif not erstelltes_Quiz %}
-            <form action="{{ url_for('quiz') }}" method="POST">
-                {% for quiz in text_quiz %}
-                <div class="card frage-card">
-                    <div class="card-body">
-                        <h5>Frage {{ loop.index }}</h5>
-                        
-                        <div class="mb-3">
-                            <strong>{{ quiz['frage1'] }}</strong>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" name="antwort1_{{ quiz['Id'] }}" class="form-control" placeholder="Deine Antwort" required>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <strong>{{ quiz['frage2'] }}</strong>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" name="antwort2_{{ quiz['Id'] }}" class="form-control" placeholder="Deine Antwort" required>
+        <a href="{{ url_for('quiz') }}" class="btn btn-warning mb-3">Quiz beantworten</a>
+                   
+                    {% for quiz in text_quiz %}
+                    <div class="card mb-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ quiz['quiz_titel'] }}</h5>
+                            <p class="card-text">Klicke hier um die Fragen und Antworten des Quizes zu sehen!</p>
+                            <form action="{{ url_for('delete_post', id=quiz['Id']) }}" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger" >Löschen</button>
+                            </form>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
-                
-                <button type="submit" class="btn btn-primary">Antworten prüfen</button>
-            </form>
-        {% endif %}
-
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+ 
     </div>
 </body>
 </html>
