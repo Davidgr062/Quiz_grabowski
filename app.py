@@ -14,7 +14,15 @@ def get_db_connection():
 def start():
     return render_template('start.html')
 
+<<<<<<< HEAD
 
+=======
+@app.route('/schueler')
+def schueler():
+    return render_template('start.html', rolle = "S")    
+
+# Lehrer-Seite / Board anzeigen
+>>>>>>> 8c325cd990cf44b1c7c607604a607296f461dfcc
 @app.route('/lehrer')
 def index():
     conn = get_db_connection()
@@ -23,6 +31,11 @@ def index():
     return render_template('index.html', text_quiz=text_quiz)
  
 
+<<<<<<< HEAD
+=======
+
+# Quiz-Seite: Fragen anzeigen und beantworten
+>>>>>>> 8c325cd990cf44b1c7c607604a607296f461dfcc
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
     conn = get_db_connection()
