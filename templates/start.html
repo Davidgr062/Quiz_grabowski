@@ -24,15 +24,17 @@ body{
     padding:30px;
     text-align:center;
 }
-
+ 
 h1{
     margin-bottom:10px;
+    color: #ffffff;
 }
-
+ 
 p{
     margin-bottom:25px;
+    color: #ffffff;
 }
-
+ 
 .btn-rollen{
     display:block;
     width:100%;
@@ -42,30 +44,39 @@ p{
     text-decoration:none;
     border:2px solid black;
 }
-
+ 
 .btn-lehrer{
-    background:#0d6efd;
-    color:white;
+    background:#ffffff;
+    color:rgb(0, 0, 0);
 }
-
+.btn-lehrer:hover{
+    background:#000000;
+    color:rgb(255, 255, 255);
+    border: #ffffff 2px solid;
+}
 .btn-schueler{
-    background:#ffc107;
-    color:black;
+    background:#ffffff;
+    color:rgb(0, 0, 0);
+}
+.btn-schueler:hover{
+    background:#000000;
+    color:rgb(255, 255, 255);
+    border: #ffffff 2px solid;
 }
 </style>
 </head>
-
+ 
 <body>
-
+ 
 <div class="container">
-    <h1>Willkommen zum Quiz</h1>
+    <h1>Willkommen zu KWIZZ</h1>
     <p>Wie möchtest du fortfahren?</p>
-
+ 
     <a href="{{ url_for('index') }}" class="btn-rollen btn-lehrer">
         Als Lehrer fortfahren
     </a>
-
-    <a href="{{ url_for('schueler') }}" class="btn-rollen btn-schueler">
+ 
+    <a href="{{ url_for('quiz') }}" class="btn-rollen btn-schueler">
         Als Schüler fortfahren
     </a>
     {% if rolle == "S"%}
@@ -80,6 +91,8 @@ p{
                      
     {% endif %}
 </div>
-
+ 
 </body>
 </html>
+ 
+ 
