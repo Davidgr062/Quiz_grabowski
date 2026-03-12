@@ -14,6 +14,10 @@ def get_db_connection():
 def start():
     return render_template('start.html')
 
+@app.route('/quiz')
+def schueler():
+    return render_template('start.html', rolle = "S")  
+
 @app.route('/lehrer')
 def index():
     conn = get_db_connection()
