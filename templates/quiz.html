@@ -1,36 +1,74 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Quiz</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style2/style.css') }}">
- 
-</head>
-<body>
-    <div class="container">
-       
-        <h1>Meine Quizfragen</h1>
-        <a href="{{ url_for('start') }}" class="btn btn-secondary mb-3">Zurück zur Startseite</a>
-        
+<meta charset="UTF-8">
+<title>Quiz</title>
 
-        <a href="{{ url_for('quiz') }}" class="btn btn-warning mb-3">Quiz beantworten</a>
-                   
-                    {% for quiz in text_quiz %}
-                        <div class="card mb-3" style="width: 18rem;">
-                        <div class="card-body">
-                        <h5 class="card-title">{{ quiz['quiz_titel'] }}</h5>
-                        <p class="card-text">Klicke hier um die Fragen und Antworten des Quizes zu sehen!</p>
-                        <form action="{{ url_for('delete_post', id=quiz['Id']) }}" method="POST">
-                        <button type="submit" class="btn btn-danger">Löschen</button>
-                        </form>
-                        </div>
-                        </div>
-                    {% endfor %}
-                
-            </div>
-        </div>
- 
-    </div>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style2/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Meine Quizfragen</h1>
+<a href="{{ url_for('start') }}" class="btn btn-secondary mb-3">Zurück zur Startseite</a>
+
+<form method="POST">
+
+{% for quiz in text_quiz %}
+
+<div class="card mb-3" style="width: 50rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ quiz['quiz_titel'] }}</h5>
+    <p class="card-text"><b>Frage 1:</b> {{ quiz['frage1'] }}</p>
+    <input type="text" name="antwort1_{{ quiz['Id'] }}" class="form-control mb-2">
+    <p class="card-text"><b>Frage 2:</b> {{ quiz['frage2'] }}</p>
+    <input type="text" name="antwort2_{{ quiz['Id'] }}" class="form-control">
+
+  </div>
+</div>
+
+{% endfor %}
+
+<button type="submit" class="btn btn-success mb-4">Antworten abschicken</button>
+
+</form>
+{% if erstelltes_Quiz %}
+<h3>Ergebnisse</h3>
+{% for quiz in erstelltes_Quiz %}
+
+<div class="card mb-3" style="width: 18rem;">
+  <div class="card-body">
+  
+    <p><b>{{ quiz.frage1 }}</b></p>
+    <p>Deine Antwort: {{ quiz.user_antwort1 }}</p>
+    {% if quiz.correct1 %}
+      <p style="color:green;">Richtig ✅</p>
+    {% else %}
+      <p style="color:red;">Falsch ❌</p>
+    {% endif %}
+
+    
+    <p><b>{{ quiz.frage2 }}</b></p>
+    <p>Deine Antwort: {{ quiz.user_antwort2 }}</p>
+    {% if quiz.correct2 %}
+      <p style="color:green;">Richtig ✅</p>
+    {% else %}
+      <p style="color:red;">Falsch ❌ </p>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+</div>
+
 </body>
 </html>

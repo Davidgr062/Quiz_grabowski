@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS text_quiz;
-DROP TABLE IF EXISTS schueler_anmelden;
+
 
 CREATE TABLE text_quiz (
     Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -11,8 +11,7 @@ CREATE TABLE text_quiz (
 );
 
 CREATE TABLE schueler_anmelden (
-    name TEXT PRIMARY KEY,
-    nachname  TEXT,
+    schueler_name TEXT PRIMARY KEY,
     punktzahl INTEGER
    
 );

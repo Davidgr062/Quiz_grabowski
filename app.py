@@ -79,9 +79,8 @@ def add_post():
                      (frage1, antwort1, frage2, antwort2, quiz_titel))
         conn.commit()
         conn.close()
- 
-    return redirect(url_for('index'))
- 
+        return redirect(url_for('index'))   
+        
 # Nachricht löschen
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete_post(id):
