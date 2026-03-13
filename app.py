@@ -1,4 +1,3 @@
-import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
  
 app = Flask(__name__)
@@ -9,7 +8,7 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
  
-
+ 
 @app.route('/')
 def start():
     return render_template('start.html', rolle = "S" )
@@ -25,14 +24,14 @@ def index():
     conn.close()
     return render_template('index.html', text_quiz=text_quiz)
  
-
+ 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
     conn = get_db_connection()
     text_quiz = conn.execute('SELECT * FROM text_quiz').fetchall()
     
     if request.method == 'POST':
-        
+       
         erstelltes_Quiz  = []
         for quiz in text_quiz:
             frage1_id = quiz['Id']
@@ -43,7 +42,7 @@ def quiz():
            
             correct1 = user_antwort1.lower() == quiz['antwort1'].lower()
             correct2 = user_antwort2.lower() == quiz['antwort2'].lower()
-            
+           
             erstelltes_Quiz.append({
                 'frage1': quiz['frage1'],
                 'antwort1': quiz['antwort1'],
@@ -61,7 +60,7 @@ def quiz():
     conn.close()
     return render_template('quiz.html', text_quiz=text_quiz)
  
-
+ 
 @app.route('/add', methods=['POST'])
 def add_post():
     quiz_titel = request.form.get('quiz_titel')
@@ -76,8 +75,8 @@ def add_post():
                      (frage1, antwort1, frage2, antwort2, quiz_titel))
         conn.commit()
         conn.close()
-        return redirect(url_for('index'))   
-        
+        return redirect(url_for('index'))  
+       
 # Nachricht löschen
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete_post(id):
@@ -89,3 +88,4 @@ def delete_post(id):
  
 if __name__ == '__main__':
     app.run(debug=True)
+ 
