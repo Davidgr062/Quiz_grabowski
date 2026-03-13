@@ -47,7 +47,9 @@ p{
  
 .btn-lehrer{
     background:#ffffff;
-    color:rgb(0, 0, 0);  ,  n
+    color:rgb(0, 0, 0);
+}
+
 .btn-lehrer:hover{
     background:#000000;
     color:rgb(255, 255, 255);
@@ -77,7 +79,7 @@ p{
  
     <a href="{{ url_for('quiz') }}" class="btn-rollen btn-schueler">
         Als Schüler fortfahren
-    </a>
+    </a> 
     {% if rolle == "S"%}
         <h5>Meld dich an!</h5>
                 <form action="{{ url_for('add_post') }}" method="POST">
@@ -85,8 +87,7 @@ p{
                         <div class="col-md-6">
                             <input type="text" name="schueler_name" class="form-control" placeholder="Dein Name" required>
                         </div>
-         <a href="{{ url_for('quiz') }}" class="btn-rollen btn-danger">
-        fertig   </a>            
+         <a href="{{ url_for('start') }}" class="btn-rollen btn-danger">fertig</a>            
                      
     {% endif %}
 </div>

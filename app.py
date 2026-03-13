@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for
  
 app = Flask(__name__)
  
-
+ 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
@@ -14,9 +14,9 @@ def get_db_connection():
 def start():
     return render_template('start.html')
 
-@app.route('/quiz')
+@app.route('/start')
 def schueler():
-    return render_template('start.html', rolle = "S")  
+    return render_template('quiz.html', rolle = "S")  
 
 @app.route('/lehrer')
 def index():
