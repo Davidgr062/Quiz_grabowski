@@ -12,11 +12,11 @@ def get_db_connection():
 
 @app.route('/')
 def start():
-    return render_template('start.html')
+    return render_template('start.html', rolle = "S" )
 
-@app.route('/quiz')
+@app.route('/start')
 def schueler():
-    return render_template('start.html', rolle = "S")  
+    return render_template('start.html')  
 
 @app.route('/lehrer')
 def index():
@@ -30,7 +30,7 @@ def index():
 def quiz():
     conn = get_db_connection()
     text_quiz = conn.execute('SELECT * FROM text_quiz').fetchall()
-   
+    
     if request.method == 'POST':
         
         erstelltes_Quiz  = []
@@ -56,7 +56,7 @@ def quiz():
             })
        
         conn.close()
-        return render_template('quiz.html', text_quiz=text_quiz, erstelltes_Quiz=erstelltes_Quiz )
+        return render_template('quiz.html', text_quiz=text_quiz, erstelltes_Quiz=erstelltes_Quiz)
     
     conn.close()
     return render_template('quiz.html', text_quiz=text_quiz)
