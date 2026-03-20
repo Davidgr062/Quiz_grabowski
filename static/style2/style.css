@@ -6,7 +6,7 @@
             padding: 20px;
         }
         h1 {
-            color: #000;
+            color: #ffffff;
             margin-bottom: 20px;
         }
         .card {
@@ -33,13 +33,13 @@
             color: #000;
         }
         .btn-warning:hover {
-            background-color: #000;
+            background-color: #1b96e7;
             color: #fff;
             border: #ffffff solid 2px;
         }
         a.btn.btn-secondary.mb-3:hover{
             color: #ffffff;
-            background-color: #000000;
+            background-color: #1b96e7;
             border: #ffffff solid 2px;
         }
         a.btn.btn-secondary.mb-3{
