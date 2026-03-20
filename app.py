@@ -1,3 +1,4 @@
+import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
  
 app = Flask(__name__)
@@ -77,7 +78,6 @@ def add_post():
         conn.close()
         return redirect(url_for('index'))  
        
-# Nachricht löschen
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete_post(id):
     conn = get_db_connection()

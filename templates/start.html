@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -36,6 +36,8 @@ p{
 }
  
 .btn-rollen{
+    background:#ffffff;
+    color:rgb(0, 0, 0);
     display:block;
     width:100%;
     margin:10px 0;
@@ -43,6 +45,18 @@ p{
     border-radius:6px;
     text-decoration:none;
     border:2px solid black;
+}
+
+.btn-rollen:hover{
+    background:#000000;
+    color:rgb(255, 255, 255);
+    display:block;
+    width:100%;
+    margin:10px 0;
+    padding:12px;
+    border-radius:6px;
+    text-decoration:none;
+    border:2px solid rgb(255, 255, 255);
 }
  
 .btn-lehrer{
@@ -69,7 +83,7 @@ p{
 <body>
  
 <div class="container">
-    <h1>Willkommen zu KWIZZ</h1>
+    <h1 style="font-family: fantasy; font-size: 50px;">Willkommen zu KWIZZ</h1>
     <p>Wie möchtest du fortfahren?</p>
  
     <a href="{{ url_for('index') }}" class="btn-rollen btn-lehrer">
